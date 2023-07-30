@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #dfb118;
+    padding: 1rem;
+}
+
+.image {
+    height: 50px;
+    /* width: 20%; */
+    max-width: 100px;
+}
+
+.user_icon {
+    height: 50px;
+    /* width: 20%; */
+    max-width: 100px;
+}
+
+.search { 
+    /* flex: 1; */
+    margin: 0 2%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.search_img{
+    width: 70%;
+    padding: 0.5rem;
+    margin-right: 5%;
+    color: aqua;
+}
+
+.card {
+    border: 1px black solid;
+    width: 15vw;
+    height: 40vh;
+    margin: 2%;
+    padding: .5%;
+}
+
+.card > img {
+    width: 100%;
+}
+
+.restaurant-list {
+    margin: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

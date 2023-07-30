@@ -1,0 +1,5 @@
+// without options
+// {
+//     "plugins": ["transform-remove-console"]
+//   }
+{}
