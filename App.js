@@ -48,9 +48,9 @@ const RestaurantList = (props) => {
     return (
         <div className='card'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqQGoc6pXgUFxLuuitGRXLZnZhDvd2JP5DIw&usqp=CAU" alt="image" />
-            <h2>{restaurantList[1]?.name}</h2>
-            <h5>{restaurantList[1].cuisines.join(" , ")}</h5>
-            <h6>{"Rating: "+restaurantList[1]?.rating}</h6>
+            <h2>{props.restaurantList?.name}</h2>
+            <h5>{props.restaurantList?.cuisines.join(" , ")}</h5>
+            <h6>{"Rating: "+ props.restaurantList?.rating}</h6>
         </div>
     )
 }
@@ -58,14 +58,14 @@ const RestaurantList = (props) => {
 const Body = () => {
     return (
         <div className='restaurant-list'>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
-            <RestaurantList/>
+            <RestaurantList restaurantList={restaurantList[0]}/>
+            <RestaurantList restaurantList={restaurantList[1]}/>
+            <RestaurantList restaurantList={restaurantList[2]}/>
+            <RestaurantList restaurantList={restaurantList[3]}/>
+            <RestaurantList restaurantList={restaurantList[4]}/>
+            <RestaurantList restaurantList={restaurantList[5]}/>
+            <RestaurantList restaurantList={restaurantList[6]}/>
+            <RestaurantList restaurantList={restaurantList[7]}/>
         </div>
 
     )
