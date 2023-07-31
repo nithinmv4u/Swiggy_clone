@@ -43,9 +43,8 @@ const HeaderComponent = () => {
     )
 }
 
-const RestaurantList = ({restaurantList}) => {
-    console.log({restaurantList});
-    const {name, image, cuisines, rating} = restaurantList
+const RestaurantList = ({name, image, cuisines, rating}) => {
+    // console.log({restaurantList});
     return (
         <div className='card'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqQGoc6pXgUFxLuuitGRXLZnZhDvd2JP5DIw&usqp=CAU" alt="image" />
@@ -59,14 +58,14 @@ const RestaurantList = ({restaurantList}) => {
 const Body = () => {
     return (
         <div className='restaurant-list'>
-            <RestaurantList restaurantList={restaurantList[0]}/>
-            <RestaurantList restaurantList={restaurantList[1]}/>
-            <RestaurantList restaurantList={restaurantList[2]}/>
-            <RestaurantList restaurantList={restaurantList[3]}/>
-            <RestaurantList restaurantList={restaurantList[4]}/>
-            <RestaurantList restaurantList={restaurantList[5]}/>
-            <RestaurantList restaurantList={restaurantList[6]}/>
-            <RestaurantList restaurantList={restaurantList[7]}/>
+            <RestaurantList {...restaurantList[0]}/>
+            <RestaurantList {...restaurantList[1]}/>
+            <RestaurantList {...restaurantList[2]}/>
+            <RestaurantList {...restaurantList[3]}/>
+            <RestaurantList {...restaurantList[4]}/>
+            <RestaurantList {...restaurantList[5]}/>
+            <RestaurantList {...restaurantList[6]}/>
+            <RestaurantList {...restaurantList[7]}/>
         </div>
 
     )
