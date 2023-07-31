@@ -45,12 +45,13 @@ const HeaderComponent = () => {
 
 const RestaurantList = ({restaurantList}) => {
     console.log({restaurantList});
+    const {name, image, cuisines, rating} = restaurantList
     return (
         <div className='card'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqQGoc6pXgUFxLuuitGRXLZnZhDvd2JP5DIw&usqp=CAU" alt="image" />
-            <h2>{restaurantList?.name}</h2>
-            <h5>{restaurantList?.cuisines.join(" , ")}</h5>
-            <h6>{"Rating: "+ restaurantList?.rating}</h6>
+            <h2>{name}</h2>
+            <h5>{cuisines.join(" , ")}</h5>
+            <h6>{"Rating: "+ rating}</h6>
         </div>
     )
 }
