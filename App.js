@@ -9,7 +9,7 @@ const Title = () => {
         </h1>
     )
 }
-console.log(restaurantList);
+// console.log(restaurantList);
 
 const Logo = () => {
     return (
@@ -58,14 +58,11 @@ const RestaurantList = ({name, image, cuisines, rating}) => {
 const Body = () => {
     return (
         <div className='restaurant-list'>
-            <RestaurantList {...restaurantList[0]}/>
-            <RestaurantList {...restaurantList[1]}/>
-            <RestaurantList {...restaurantList[2]}/>
-            <RestaurantList {...restaurantList[3]}/>
-            <RestaurantList {...restaurantList[4]}/>
-            <RestaurantList {...restaurantList[5]}/>
-            <RestaurantList {...restaurantList[6]}/>
-            <RestaurantList {...restaurantList[7]}/>
+            {
+                restaurantList.map((restaurant) => {
+                    return (<RestaurantList {...restaurant} key={restaurant.id}/>)
+                })
+            }
         </div>
 
     )
