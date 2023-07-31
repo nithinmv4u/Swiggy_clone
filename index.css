@@ -42,7 +42,7 @@ body {
 .card {
     border: 1px black solid;
     width: 15vw;
-    height: 40vh;
+    /* height: 40vh; */
     margin: 2%;
     padding: .5%;
 }
