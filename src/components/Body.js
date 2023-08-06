@@ -1,12 +1,13 @@
 import RestaurantList from "./RestaurantList";
 import { restaurantList } from "../constants";
 import { useEffect, useState } from "react";
+import Shimmer from "./ShimmerUI";
 
 function filterRestaurant(restaurants, searchTxt){
     console.log(restaurants);
-    console.log(searchTxt);
+    console.log("search text: ", searchTxt);
     const data = restaurants.filter((restaurant) =>
-        restaurant?.info?.name.includes(searchTxt)
+        restaurant?.info?.name?.toLowerCase()?.includes(searchTxt.toLowerCase())
     );
     console.log(data);
     return data
@@ -15,10 +16,11 @@ function filterRestaurant(restaurants, searchTxt){
 const Body = () => { 
 
     const [searchTxt, setSearchTxt] = useState("");
-    const [restaurants, setRestaurant] = useState([]);
+    const [allRestaurants, setAllRestaurant] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([])
 
     useEffect(()=> {
-        console.log("hello");
+        console.log("useeffect");
         getRestaurants();
     },[])
 
@@ -27,13 +29,14 @@ const Body = () => {
           "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
         );
         const json = await data.json();
-        console.log(json)
-        setRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        console.log("get restaurants", json)
+        setAllRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
       }
 
     console.log("render");
 
-    return (
+    return allRestaurants?.length ? (
         <>
             <div className='search'>
                 <input 
@@ -42,28 +45,34 @@ const Body = () => {
                 placeholder='Search' 
                 value={searchTxt}
                 onChange={(e) => {
+                    console.log("onchange")
                     setSearchTxt(e.target.value)
                 }}
                 />
                 <a href="#" onClick={(e) =>{
-                    getRestaurants();
-                    const data = filterRestaurant(restaurants, searchTxt);
+                    const data = filterRestaurant(allRestaurants, searchTxt);
                     // console.log(e.pageX);
-                    setRestaurant(data);
-                }} ><span className="material-symbols-outlined">search</span> </a> 
+                    setFilteredRestaurants(data);
+                }} ><span className="material-symbols-outlined">search</span></a> 
+                <button style={{marginLeft:'5%'}} onClick={() => {
+                    setSearchTxt("")
+                    setFilteredRestaurants(allRestaurants)
+                }}>Clear Search</button>
             </div>
             <div className='restaurant-list'>
                 {
-                    restaurants.map((restaurant) => {
+                    filteredRestaurants.length === 0 ? (
+                        <h2>No Restaurants for your search</h2>
+                    ):(
+                    filteredRestaurants.map((restaurant) => {
                         return (<RestaurantList {...restaurant?.info} key={restaurant?.info?.id}/>)
-                        console.log(restaurant?.info?.id);
-                    })
+                    }))
                 }
             </div>
         </>
 
 
-    )
+    ) : <Shimmer/>
 }
 
 export default Body;
