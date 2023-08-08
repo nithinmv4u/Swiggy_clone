@@ -57,3 +57,35 @@ body {
     justify-content: space-between;
     /* justify-content: center; */
 }
+
+.shimmer {
+    background: linear-gradient(
+      to right,
+      #f6f7f8 0%,
+      #e3e3e3 50%,
+      #f6f7f8 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 2s infinite;
+    width: 15vw;
+    height: 40vh;
+    margin: 2%;
+    padding: .5%;
+  }
+
+  /* .shimmer_card {
+    border: 1px black solid;
+    width: 15vw;
+    height: 40vh;
+    margin: 2%;
+    padding: .5%;
+} */
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
