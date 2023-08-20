@@ -26,7 +26,7 @@ const Shimmer = () => {
             <div className="restaurant-list">
                 {
                     Array.from({length : 20}).map((_,index) => (
-                        <RestaurantCard/>
+                        <RestaurantCard key={ index }/>
                     ))
                 }
                 
