@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Contact from './components/Contact';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import RestaurantMenu from './components/RestaurantMenu';
+import Login from './components/Login'
 
 const App = () => {
     return (
@@ -28,19 +29,23 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Body/>
+                element: <Body/>,
             },
             {
                 path: "/about",
-                element: <About/>
+                element: <About/>,
             },
             {
                 path: "/contact",
-                element: <Contact/>
+                element: <Contact/>,
             },
             {
                 path: "/restaurant/:id",
-                element: <RestaurantMenu/>
+                element: <RestaurantMenu/>,
+            },
+            {
+                path: "/login",
+                element: <Login/>,
             },
         ]
     },

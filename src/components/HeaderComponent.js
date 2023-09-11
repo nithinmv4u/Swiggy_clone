@@ -24,9 +24,9 @@ const HeaderComponent = () => {
             <div style={{display:"flex", width:'10%', justifyContent:'space-between'}}>
                 <UserIcon/>
                 {
-                    isLogged ? <button onClick={() => {
+                    isLogged ? <Link to={'/login'}><button onClick={() => {
                         setLogged(false);
-                    }}>Login</button> : <button onClick={() => {
+                    }}>Login</button></Link> : <button onClick={() => {
                         setLogged(true)
                     }}>Logout</button>
                 }

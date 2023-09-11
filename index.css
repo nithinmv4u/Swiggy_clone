@@ -58,6 +58,25 @@ body {
     /* justify-content: center; */
 }
 
+.menu {
+  display: flex;
+}
+
+.login-form{
+  padding: 10vh;
+  height: 50vh;
+  width:70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: crimson;
+  color: white;
+}
+
+.input-form{
+  padding: 2%;
+}
+
 .shimmer {
     background: linear-gradient(
       to right,
