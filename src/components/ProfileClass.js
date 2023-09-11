@@ -1,4 +1,5 @@
 import React from "react";
+import { json } from "react-router-dom";
 
 class ProfileClass extends React.Component {
 
@@ -6,12 +7,29 @@ class ProfileClass extends React.Component {
         super(props);
         this.state = {
             count : 0,
+            userInfo : {
+                name : "",
+                location: "",
+                avatar_url : "",
+            }
         };
         console.log("constructor "+props.comp);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         console.log("Component did mount "+this.props.comp);
+        const githubToken = process.env.GITHUB_TOKEN;
+        const data = await fetch("https://api.github.com/users/nithinmv4u",{
+            headers: {
+              Authorization: `token ${githubToken}`
+            }
+          }
+        );
+        console.log(data);
+        const json = await data.json();
+        this.setState({
+            userInfo : json,
+        })
     }
 
     render(){
@@ -31,6 +49,10 @@ class ProfileClass extends React.Component {
                         count : this.state.count-1,
                     })
                 }}> - </button>
+                <h2>My Git Account</h2>
+                <h3>Name:{this.state.userInfo.name}</h3>
+                <h4>Location: {this.state.userInfo.location}</h4>
+                <img src={this.state.userInfo.avatar_url} />
             </div>
         )
     }  

@@ -11,6 +11,8 @@ import RestaurantMenu from './components/RestaurantMenu';
 import Login from './components/Login'
 import Profile from './components/Profile';
 
+require('dotenv').config();
+
 const App = () => {
     return (
         <React.Fragment>
