@@ -9,7 +9,7 @@ const About = () => {
                 <h3>This is a normal demo about us page... did you like it??????</h3>
                 <Outlet/>
                 <ProfileClass comp="First Component"/>
-                <ProfileClass comp="Second Component"/>
+                {/* <ProfileClass comp="Second Component"/> */}
             </div>  
         </>
                                                                                                  

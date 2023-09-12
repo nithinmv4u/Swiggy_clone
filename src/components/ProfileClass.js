@@ -32,6 +32,18 @@ class ProfileClass extends React.Component {
         })
     }
 
+    componentDidUpdate(){
+        console.log("component did update");
+        this.timer = setInterval(()=>{
+            console.log("updating..");
+        },1000);
+    }
+
+    componentWillUnmount(){
+        console.log("component will mount");
+        clearInterval(this.timer);
+    }
+
     render(){
         console.log("render "+this.props.comp);
         return(
