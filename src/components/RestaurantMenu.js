@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CLDNRY } from "../constants";
 import Shimmer from "./ShimmerUI";
-import useRestaurant from "../utils/useRestaurant";
+import useRestaurant from "../utils/useRestaurantInfo";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params

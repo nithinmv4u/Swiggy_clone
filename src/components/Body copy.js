@@ -4,12 +4,29 @@ import { useEffect, useState } from "react";
 import Shimmer from "./ShimmerUI";
 import { Link } from "react-router-dom"
 import { filterRestaurant } from "../utils/helper";
-import useRestaurants from "../utils/useRestaurants";
 
-const Body = () => {
-    const [allRestaurants, setFilterRestaurants] = useRestaurants(null);
-    console.log(allRestaurants);
-    const [searchTxt, setSearchTxt] = useState(null);
+const Body = () => { 
+
+    const [searchTxt, setSearchTxt] = useState("");
+    const [allRestaurants, setAllRestaurant] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([])
+
+    useEffect(()=> {
+        console.log("useeffect");
+        getRestaurants();
+    },[])
+
+    async function getRestaurants() {
+        const data = await fetch(
+          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+        );
+        const json = await data.json();
+        console.log("get restaurants", json)
+        setAllRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      }
+
+      
     console.log("render");
 
     return allRestaurants?.length ? (
@@ -21,23 +38,26 @@ const Body = () => {
                 placeholder='Search' 
                 value={searchTxt}
                 onChange={(e) => {
-                    console.log("onchange "+searchTxt)
+                    console.log("onchange")
                     setSearchTxt(e.target.value);
                 }}
                 />
                 <a href="#" onClick={(e) =>{
-                    setFilterRestaurants(searchTxt);
+                    const data = filterRestaurant(allRestaurants, searchTxt);
+                    // console.log(e.pageX);
+                    setFilteredRestaurants(data);
                 }} ><span className="material-symbols-outlined">search</span></a> 
                 <button style={{marginLeft:'5%'}} onClick={() => {
-                    setFilterRestaurants(null)
+                    setSearchTxt("")
+                    setFilteredRestaurants(allRestaurants)
                 }}>Clear Search</button>
             </div>
             <div className='restaurant-list'>
                 {
-                    allRestaurants.length === 0 ? (
+                    filteredRestaurants.length === 0 ? (
                         <h2>No Restaurants for your search</h2>
                     ):(
-                    allRestaurants.map((restaurant) => {
+                    filteredRestaurants.map((restaurant) => {
                         return (<Link to={"/restaurant/"+restaurant?.info?.id}><RestaurantList {...restaurant?.info} key={restaurant?.info?.id}/></Link>)
                     }))
                 }
