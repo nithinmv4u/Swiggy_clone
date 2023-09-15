@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom/client';
 import HeaderComponent from './components/HeaderComponent';
 import Body from './components/Body';
@@ -10,6 +10,9 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import RestaurantMenu from './components/RestaurantMenu';
 import Login from './components/Login'
 import Profile from './components/Profile';
+import Shimmer from './components/ShimmerUI';
+
+const Instamart = lazy(() => import('./components/Instamart'));
 
 require('dotenv').config();
 
@@ -56,6 +59,14 @@ const appRouter = createBrowserRouter([
                 path: "/login",
                 element: <Login/>,
             },
+            {
+                path: '/instamart',
+                element: (
+                    <Suspense fallback={<Shimmer/>}>
+                        <Instamart/>
+                    </Suspense>
+                ),
+            }
         ]
     },
 
