@@ -15,10 +15,10 @@ const HeaderComponent = () => {
             <SearchBar/>
             {
                 <div style={{display:"flex", width:'20%', justifyContent:'space-between',}}>
-                    <Link to="/about"><h4>About</h4></Link>
-                    <Link to="/"><h4>Home</h4></Link>
-                    <Link to="/contact"><h4>Contact</h4></Link>
-                    <h4>Cart</h4>
+                    <Link to="/about"><h4 key={0}>About</h4></Link>
+                    <Link to="/"><h4 key={1}>Home</h4></Link>
+                    <Link to="/contact"><h4 key={2}>Contact</h4></Link>
+                    <h4 key={3}>Cart</h4>
                 </div>
             }
             <div style={{display:"flex", width:'10%', justifyContent:'space-between'}}>

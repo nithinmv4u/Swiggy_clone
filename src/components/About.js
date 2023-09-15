@@ -18,13 +18,13 @@ const About = () => {
                     <h6>Background Color</h6>
                     <button onClick={()=>{
                         setBgcolor(useBgColor('red'));
-                    }}>Red</button>
+                    }} key={0}>Red</button>
                     <button onClick={()=>{
                         setBgcolor(useBgColor('blue'))
-                    }}>Green</button>
+                    }} key={1}>Green</button>
                     <button onClick={()=>{
                         setBgcolor(useBgColor('green'))
-                    }}>Blue</button>
+                    }} key={2}>Blue</button>
                 </div>
             </div>  
         </>

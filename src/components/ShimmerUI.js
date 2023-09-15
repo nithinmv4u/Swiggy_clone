@@ -17,7 +17,7 @@ const Shimmer = () => {
                 className='search_img' 
                 type="text" 
                 placeholder='Search' 
-                value=''
+                defaultValue=''
                 />
                 <a href="#"><span className="material-symbols-outlined">search</span> </a>
                 <button style={{marginLeft:'5%'}} onClick={() => {

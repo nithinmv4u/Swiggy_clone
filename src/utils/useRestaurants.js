@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { filterRestaurant } from "./helper";
+import { RESTAURANT_LIST } from "../constants";
 
-const useRestaurants = (searchTxt) => {
+const useRestaurants = () => {
 
     const [allRestaurants, setRestaurants] = useState(null);
-    console.log("userestaurants");
+    console.log("userestaurants",allRestaurants);
 
     useEffect(() => {
         console.log("userestaurants use effect");
@@ -12,7 +13,7 @@ const useRestaurants = (searchTxt) => {
     },[]);
 
     async function getRestaurants() {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch(RESTAURANT_LIST);
         const json = await data.json();
         setRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
@@ -20,9 +21,6 @@ const useRestaurants = (searchTxt) => {
     const setFilterRestaurants = (searchTxt) => {
         searchTxt ? setRestaurants(filterRestaurant(allRestaurants, searchTxt)):getRestaurants();
     }
-    // if (searchTxt !== null){
-    //     setRestaurants(filterRestaurant(allRestaurants, searchTxt));
-    // }
     return [allRestaurants, setFilterRestaurants]
 }
 

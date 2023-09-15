@@ -7,14 +7,14 @@ import { filterRestaurant } from "../utils/helper";
 import useRestaurants from "../utils/useRestaurants";
 
 const Body = () => {
-    const [allRestaurants, setFilterRestaurants] = useRestaurants(null);
-    console.log(allRestaurants);
-    const [searchTxt, setSearchTxt] = useState(null);
+    const [allRestaurants, setFilterRestaurants] = useRestaurants();
+    console.log("body",allRestaurants);
+    const [searchTxt, setSearchTxt] = useState('');
     console.log("render");
 
     return allRestaurants?.length ? (
         <>
-            <div className='search'>
+            <div className='search' key={0}>
                 <input 
                 className='search_img' 
                 type="text" 
@@ -26,15 +26,17 @@ const Body = () => {
                 }}
                 />
                 <a href="#" onClick={(e) =>{
+                    e.preventDefault();
                     setFilterRestaurants(searchTxt);
                 }} ><span className="material-symbols-outlined">search</span></a> 
                 <button style={{marginLeft:'5%'}} onClick={() => {
-                    setFilterRestaurants(null)
+                    setSearchTxt('');
+                    setFilterRestaurants(null);
                 }}>Clear Search</button>
             </div>
-            <div className='restaurant-list'>
+            <div className='restaurant-list' key={1}>
                 {
-                    allRestaurants.length === 0 ? (
+                    allRestaurants[0].info === 'NO_RESTAURANT' ? (
                         <h2>No Restaurants for your search</h2>
                     ):(
                     allRestaurants.map((restaurant) => {
