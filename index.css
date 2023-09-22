@@ -1,4 +1,11 @@
-body {
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+/* --------------- Tailwind is used --------------- */
+/* body {
     margin: 0;
 }
 
@@ -12,18 +19,15 @@ body {
 
 .image {
     height: 50px;
-    /* width: 20%; */
     max-width: 100px;
 }
 
 .user_icon {
     height: 50px;
-    /* width: 20%; */
     max-width: 100px;
 }
 
-.search { 
-    /* flex: 1; */
+.search {
     margin: 0 2%;
     padding: 0.5rem;
     font-size: 1rem;
@@ -41,7 +45,6 @@ body {
 .card {
     border: 1px black solid;
     width: 15vw;
-    /* height: 40vh; */
     margin: 2%;
     padding: .5%;
 }
@@ -55,7 +58,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* justify-content: center; */
 }
 
 .menu {
@@ -91,14 +93,6 @@ body {
     margin: 2%;
     padding: .5%;
   }
-
-  /* .shimmer_card {
-    border: 1px black solid;
-    width: 15vw;
-    height: 40vh;
-    margin: 2%;
-    padding: .5%;
-} */
   
   @keyframes shimmer {
     0% {
@@ -107,4 +101,4 @@ body {
     100% {
       background-position: 200% 0;
     }
-  }
+  } */

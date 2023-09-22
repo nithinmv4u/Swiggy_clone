@@ -2,7 +2,7 @@ import { LOGO } from "../constants";
 
 const Title = () => {
     return (
-        <img className='image' src= { LOGO } alt="Logo" />
+        <img className='h-20' src= { LOGO } alt="Logo" />
     )
 }
 

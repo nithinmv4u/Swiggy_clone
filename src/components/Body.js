@@ -18,9 +18,9 @@ const Body = () => {
 
     return allRestaurants?.length ? (
         <>
-            <div className='search' key={0}>
+            <div className='bg-orange-700 p-4 text-gray-50 border-b-2 border-blue-800 flex justify-center items-center' key={0}>
                 <input 
-                className='search_img' 
+                className='p-2 mx-4 rounded-lg' 
                 type="text" 
                 placeholder='Search' 
                 value={searchTxt}
@@ -29,16 +29,16 @@ const Body = () => {
                     setSearchTxt(e.target.value);
                 }}
                 />
-                <a href="#" onClick={(e) =>{
+                <a href="#" className="mx-4 hover:text-yellow-300" onClick={(e) =>{
                     e.preventDefault();
                     setFilterRestaurants(searchTxt);
                 }} ><span className="material-symbols-outlined">search</span></a> 
-                <button style={{marginLeft:'5%'}} onClick={() => {
+                <button className="mx-4 hover:text-yellow-300" onClick={() => {
                     setSearchTxt('');
                     setFilterRestaurants(null);
                 }}>Clear Search</button>
             </div>
-            <div className='restaurant-list' key={1}>
+            <div className='container mx-auto p-4 flex flex-wrap justify-around m-2' key={1}>
                 {
                     allRestaurants[0].info === 'NO_RESTAURANT' ? (
                         <h2>No Restaurants for your search</h2>

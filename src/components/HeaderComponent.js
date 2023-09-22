@@ -10,19 +10,17 @@ const HeaderComponent = () => {
     const [isLogged, setLogged] = useState(true)
 
     return (
-        <div className='header'>
+        <div className='flex justify-between items-center p-2 bg-orange-600 drop-shadow-xl'>
             <Title/>
-            <SearchBar/>
-            {
-                <div style={{display:"flex", width:'40%', justifyContent:'space-between',}}>
-                    <Link to="/about"><h4 key={0}>About</h4></Link>
-                    <Link to="/"><h4 key={1}>Home</h4></Link>
-                    <Link to="/contact"><h4 key={2}>Contact</h4></Link>
-                    <h4 key={3}>Cart</h4>
-                    <Link to='/instamart' key={4}><h4>Instamart</h4></Link>
-                </div>
-            }
-            <div style={{display:"flex", width:'10%', justifyContent:'space-between'}}>
+            {/* <SearchBar/> */}
+            <div className="flex justify-around items-center w-2/6 font-bold text-white ">
+                <Link to="/about"><h4 className="hover:text-yellow-200" key={0}>About</h4></Link>
+                <Link to="/"><h4 className="hover:text-yellow-200" key={1}>Home</h4></Link>
+                <Link to="/contact"><h4 className="hover:text-yellow-200" key={2}>Contact</h4></Link>
+                <h4 className="hover:text-yellow-200" key={3}>Cart</h4>
+                <Link to='/instamart' ><h4 className="hover:text-yellow-200" key={4}>Instamart</h4></Link>
+            </div>
+            <div className="flex items-center w-2/12 justify-around font-bold text-white hover:text-yellow-200">
                 <UserIcon/>
                 {
                     isLogged ? <Link to={'/login'}><button onClick={() => {
