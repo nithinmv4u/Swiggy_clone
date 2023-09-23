@@ -21,11 +21,7 @@ const Section = ({ title, content, visiblity, setIsVisible }) => {
 
 const Instamart = () => {
 
-    const [sectionConfig, setSectionConfig] = useState({
-        showIntro : false,
-        showTeam : false,
-        showMotive : false,
-    })
+    const [sectionConfig, setSectionConfig] = useState("introduction")
 
     return (
         <>
@@ -33,37 +29,28 @@ const Instamart = () => {
             <Section
                 title = {"Introduction"}
                 content = {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-                visiblity = { sectionConfig.showIntro }
+                visiblity = { sectionConfig === "introduction" }
                 setIsVisible={(boolean)=>{
-                    setSectionConfig({
-                        showIntro : boolean,
-                        showTeam : false,
-                        showMotive : false,
-                    })
+                    if(boolean)setSectionConfig("introduction")
+                    else setSectionConfig("")
                 }}
             />
             <Section
                 title = {"Team"}
                 content = {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-                visiblity = { sectionConfig.showTeam }
+                visiblity = { sectionConfig === "team" }
                 setIsVisible={(boolean)=>{
-                    setSectionConfig({
-                        showIntro : false,
-                        showTeam : boolean,
-                        showMotive : false,
-                    })
+                    if(boolean)setSectionConfig("team")
+                    else setSectionConfig("")
                 }}
             />
             <Section
                 title = {"Motive"}
                 content = {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
-                visiblity = { sectionConfig.showMotive }
+                visiblity = { sectionConfig === "motive" }
                 setIsVisible={(boolean)=>{
-                    setSectionConfig({
-                        showIntro : false,
-                        showTeam : false,
-                        showMotive : boolean,
-                    })
+                    if(boolean)setSectionConfig("motive")
+                    else setSectionConfig("")
                 }}
             />
         </>
