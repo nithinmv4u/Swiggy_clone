@@ -2,12 +2,21 @@ import Title from "./Title";
 import SearchBar from "./SearchBar";
 import UserIcon from "./UserIcon";
 import Authentication from "./Authentication";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom"
+import UserContext from "../utils/UserContext";
 
 const HeaderComponent = () => {
 
     const [isLogged, setLogged] = useState(true)
+
+    // const [user, setUser] = useState({
+    //     name: "MyName",
+    //     email: "some@gmail.com",
+    // })
+
+    const {user, status} = useContext(UserContext);
+    console.log(user);
 
     return (
         <div className='flex justify-between items-center p-2 bg-orange-600 drop-shadow-xl'>
@@ -20,12 +29,17 @@ const HeaderComponent = () => {
                 <h4 className="hover:text-yellow-200" key={3}>Cart</h4>
                 <Link to='/instamart' ><h4 className="hover:text-yellow-200" key={4}>Instamart</h4></Link>
             </div>
-            <div className="flex items-center w-2/12 justify-around font-bold text-white hover:text-yellow-200">
-                <UserIcon/>
+            <div className="flex items-center w-2/12 justify-around font-bold text-white">
+                
+                <div>
+                    <UserIcon/>
+                    <h4>user : {user.name}</h4>
+                    <h4 className={`bg-[${status[1]}] px-2 border-white border rounded-lg`}>status : {status[0]}</h4>
+                </div>
                 {
-                    isLogged ? <Link to={'/login'}><button onClick={() => {
+                    isLogged ? <Link to={'/login'}><button className="hover:text-yellow-200" onClick={() => {
                         setLogged(false);
-                    }}>Login</button></Link> : <button onClick={() => {
+                    }}>Login</button></Link> : <button className="hover:text-yellow-200" onClick={() => {
                         setLogged(true)
                     }}>Logout</button>
                 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CLDNRY } from "../constants";
 import Shimmer from "./ShimmerUI";
-import useRestaurant from "../utils/useRestaurantInfo";
+import useRestaurantInfo from "../utils/useRestaurantInfo";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
@@ -10,9 +10,9 @@ const RestaurantMenu = () => {
   console.log("restaurant id: "+resId);
   // Use proper names
 
-  const restaurant = useRestaurant( resId )
+  const restaurant = useRestaurantInfo( resId )
 
-  return (
+  return restaurant ? (
     <div className="menu">
       <div>
         <h1>Restraunt id: {resId}</h1>
@@ -32,6 +32,8 @@ const RestaurantMenu = () => {
         </ul>
       </div>
     </div>
+  ) : (
+    <h2 className="font-bold text-3xl text-center text-red-600 py-10">API Call didn't return a result, please check your API...!!!</h2>
   );
 };
 

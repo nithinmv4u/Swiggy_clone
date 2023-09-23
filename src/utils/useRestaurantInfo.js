@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { RESTAURANT_INFO } from "../constants";
 
-const useRestaurant = (resId) => {
+const useRestaurantInfo = (resId) => {
 
     const [restaurant, setRestauraunt] = useState(null);
 
@@ -19,4 +19,4 @@ const useRestaurant = (resId) => {
     return restaurant;
 }
 
-export default useRestaurant;
+export default useRestaurantInfo;

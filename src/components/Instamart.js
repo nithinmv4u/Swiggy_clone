@@ -7,14 +7,17 @@ const Section = ({ title, content, visiblity, setIsVisible }) => {
             <h2 className="text-xl">{ title }</h2>
             {
                 visiblity ?
-                <button className="underline text-xs" onClick={() => {
-                    setIsVisible(false);
-                }}>Hide</button> :                
+                <>
+                    <button className="underline text-xs" onClick={() => {
+                        setIsVisible(false);
+                    }}>Hide</button>
+                    <p>{ content }</p>
+                </>
+                :                
                 <button className="underline text-xs" onClick={() => {
                     setIsVisible(true);
                 }}>Show</button>
             }
-            { visiblity && <p>{ content }</p> }
         </div>
     )
 }

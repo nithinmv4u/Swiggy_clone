@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import ReactDOM from 'react-dom/client';
 import HeaderComponent from './components/HeaderComponent';
 import Body from './components/Body';
@@ -11,18 +11,32 @@ import RestaurantMenu from './components/RestaurantMenu';
 import Login from './components/Login'
 import Profile from './components/Profile';
 import Shimmer from './components/ShimmerUI';
+import UserContext from './utils/UserContext';
+import useOnline from './utils/useOnline';
 
 const Instamart = lazy(() => import('./components/Instamart'));
 
 require('dotenv').config();
 
 const App = () => {
+
+    /** logged in data from api */
+    const [user, setUser] = useState({
+        name: "Customer",
+        email: "customer@gmail.com",
+    })
+    const [isOnline, color] = useOnline() ? ["online", "green"] : ["offline", "red"];
+    
     return (
-        <React.Fragment>
+        <UserContext.Provider value={{
+            user:user,
+            status:[isOnline, color],
+            setUser: setUser,
+        }}>
             <HeaderComponent/>
             <Outlet/>
             <Footer/>
-        </React.Fragment>
+        </UserContext.Provider>
         
     )
 }

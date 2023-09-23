@@ -1,5 +1,6 @@
 import React from "react";
 import { json } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 class ProfileClass extends React.Component {
 
@@ -51,6 +52,9 @@ class ProfileClass extends React.Component {
                 <h2>Profile class</h2>
                 <h4>Component : {this.props.comp}</h4>
                 <h5>Count : {this.state.count}</h5>
+                <UserContext.Consumer>
+                    {({user, status})=><h4 className="text-purple-600">user: {user.name} and email: {user.email} with status: {status}</h4>}
+                </UserContext.Consumer>
                 <button onClick = { () =>{
                     this.setState({
                         count : this.state.count+1,
