@@ -6,34 +6,52 @@ import useRestaurantInfo from "../utils/useRestaurantInfo";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
-  const { resId } = useParams();
-  console.log("restaurant id: "+resId);
+  const { id } = useParams();
+  console.log("restaurant id: ",id);
   // Use proper names
 
-  const restaurant = useRestaurantInfo( resId )
+  const restaurant = useRestaurantInfo( id )
 
   return restaurant ? (
-    <div className="menu">
-      <div>
-        <h1>Restraunt id: {resId}</h1>
-        <h2>{restaurant?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants[2]}</h2>
-        <img src={IMG_CLDNRY + restaurant?.cloudinaryImageId} />
-        <h3>{restaurant?.area}</h3>
-        <h3>{restaurant?.city}</h3>
-        <h3>{restaurant?.avgRating} stars</h3>
-        <h3>{restaurant?.costForTwoMsg}</h3>
+    <div className="flex flex-col items-center p-4 m-4 bg-slate-100 rounded-md">
+      <div className="flex w-10/12 m-4 items-center justify-center bg-gray-300 p-2 rounded-md">
+        <div className="w-1/3 p-4">
+          <h2 className="font-semibold text-4xl">{restaurant?.cards[0]?.card?.card?.info?.name}</h2>
+          <h1 className="text-xs text-gray-500 py-1">Restraunt id : {id}</h1>
+          <h3 className="text-sm font-medium">{restaurant?.cards[0]?.card?.card?.info?.areaName}, {restaurant?.cards[0]?.card?.card?.info?.city}</h3>
+          <h3 className="text-sm font-medium items-center flex py-1">Rating : {restaurant?.cards[0]?.card?.card?.info?.avgRating} <span style={{fontSize: '100%'}} className="material-symbols-outlined ">star</span></h3>
+          <h3 className="text-xs py-1">Cost for two : ₹ {restaurant?.cards[0].card.card.info.costForTwo / 100}</h3>
+        </div>
+        <img className="w-1/3 rounded-r-lg" src={IMG_CLDNRY + restaurant?.cards[0]?.card?.card?.info?.cloudinaryImageId} />
       </div>
-      <div>
-        <h1>Menu</h1>
-        <ul>
-          {Object.values(restaurant?.menu?.items)?.map((item) => (
-            <li key={item?.id}>{item?.name}</li>
-          ))}
+      <div className="flex flex-col m-4 p-4 w-10/12 items-center justify-center bg-gray-300 rounded-md">
+        <h1 className="text-3xl">Menu</h1>
+        <ul className="w-10/12">
+          {Object.values(restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?? {}).map((item) => {
+            const [type, color] = item?.card?.info?.isVeg ? ["vegetarian", "green-600"] : ["non-vegetarian", "red-600"];
+            console.log("item : ",item);
+            return item ? ( 
+            <li className="flex p-2 m-2 rounded-md bg-slate-50" key={item?.card?.info?.id}>
+                <div className="m-2 p-2 w-3/4">
+                  <h2 className="text-xl">{item?.card?.info?.name}</h2>
+                    <p className="text-xs py-2"><span className="font-semibold">Add-Ons : </span> 
+                    {Object.values(restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards[6]?.card?.info?.addons?? {}).map((addons) => (
+                      Object.values(addons?.choices?? {}).map((choices) => (
+                        <span>{choices.name}, </span>
+                      ))             
+                    ))}</p>
+                    <p className={`text-xs font-medium text-${color}`}>Category : {type}</p>
+                </div>
+                <div className="w-1/4 flex items-center">
+                    <img className="p-1 rounded-lg" src={IMG_CLDNRY + item?.card?.info?.imageId} alt="" />
+                </div>             
+            </li> ) : (<p>"No Menu Found!"</p>)
+            })}
         </ul>
       </div>
     </div>
   ) : (
-    <h2 className="font-bold text-3xl text-center text-red-600 py-10">API Call didn't return a result, please check your API...!!!</h2>
+    <Shimmer/>
   );
 };
 

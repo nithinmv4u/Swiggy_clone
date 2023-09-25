@@ -32,11 +32,11 @@ const Body = () => {
                     setSearchTxt(e.target.value);
                 }}
                 />
-                <a href="#" className="mx-4 hover:text-yellow-300" onClick={(e) =>{
+                <a href="#" className="mx-4 bg-yellow-300 hover:bg-yellow-400 p-1 rounded-md" onClick={(e) =>{
                     e.preventDefault();
                     setFilterRestaurants(searchTxt);
                 }} ><span className="material-symbols-outlined">search</span></a> 
-                <button className="mx-4 hover:bg-yellow-700 rounded-md bg-yellow-600 p-2 shadow-lg" onClick={() => {
+                <button className="mx-4 hover:bg-yellow-400 rounded-md bg-yellow-300 p-2 shadow-lg font-semibold" onClick={() => {
                     setSearchTxt('');
                     setFilterRestaurants(null);
                 }}>Clear Search</button>
