@@ -13,6 +13,9 @@ import Profile from './components/Profile';
 import Shimmer from './components/ShimmerUI';
 import UserContext from './utils/UserContext';
 import useOnline from './utils/useOnline';
+import { Provider } from 'react-redux';
+import store from './utils/store';
+import Cart from './components/Cart';
 
 const Instamart = lazy(() => import('./components/Instamart'));
 
@@ -28,15 +31,18 @@ const App = () => {
     const [isOnline, color] = useOnline() ? ["online", "green"] : ["offline", "red"];
     
     return (
-        <UserContext.Provider value={{
-            user:user,
-            status:[isOnline, color],
-            setUser: setUser,
-        }}>
-            <HeaderComponent/>
-            <Outlet/>
-            <Footer/>
-        </UserContext.Provider>
+        <Provider store={store}>
+            <UserContext.Provider value={{
+                user:user,
+                status:[isOnline, color],
+                setUser: setUser,
+            }}>
+                <HeaderComponent/>
+                <Outlet/>
+                <Footer/>
+            </UserContext.Provider>
+        </Provider>
+        
         
     )
 }
@@ -80,7 +86,11 @@ const appRouter = createBrowserRouter([
                         <Instamart/>
                     </Suspense>
                 ),
-            }
+            },
+            {
+                path : "/cart",
+                element : <Cart/>,
+            },
         ]
     },
 

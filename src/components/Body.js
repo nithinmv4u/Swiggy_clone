@@ -1,4 +1,4 @@
-import RestaurantList from "./RestaurantList";
+import RestaurantCard from "./RestaurantCard";
 import { useContext, useEffect, useState } from "react";
 import Shimmer from "./ShimmerUI";
 import { Link } from "react-router-dom"
@@ -51,7 +51,7 @@ const Body = () => {
                         <h2>No Restaurants for your search</h2>
                     ):(
                     allRestaurants.map((restaurant) => {
-                        return (<Link to={"/restaurant/"+restaurant?.info?.id}><RestaurantList {...restaurant?.info} key={restaurant?.info?.id}/></Link>)
+                        return (<Link to={"/restaurant/"+restaurant?.info?.id}><RestaurantCard {...restaurant?.info} key={restaurant?.info?.id}/></Link>)
                     }))
                 }
             </div>

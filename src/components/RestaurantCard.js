@@ -1,6 +1,6 @@
 import { IMG_CLDNRY } from "../constants";
 
-const RestaurantList = ({name, cloudinaryImageId, cuisines, avgRating}) => {
+const RestaurantCard = ({name, cloudinaryImageId, cuisines, avgRating}) => {
     // console.log({restaurantList});
     return (
         <div className='flex flex-col justify-around p-4 m-2 w-64 bg-orange-200 shadow-lg rounded-md h-[90%]'>
@@ -12,4 +12,4 @@ const RestaurantList = ({name, cloudinaryImageId, cuisines, avgRating}) => {
     )
 }
 
-export default RestaurantList;
+export default RestaurantCard;

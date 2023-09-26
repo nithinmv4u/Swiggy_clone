@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { IMG_CLDNRY } from "../constants";
 import Shimmer from "./ShimmerUI";
 import useRestaurantInfo from "../utils/useRestaurantInfo";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
@@ -10,7 +12,14 @@ const RestaurantMenu = () => {
   console.log("restaurant id: ",id);
   // Use proper names
 
-  const restaurant = useRestaurantInfo( id )
+  const restaurant = useRestaurantInfo( id );
+  const itemCards = restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?? restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards ?? restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.categories[0]?.itemCards;
+  console.log("itemcards:  ",itemCards);
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  }
 
   return restaurant ? (
     <div className="flex flex-col items-center p-4 m-4 bg-slate-100 rounded-md">
@@ -27,20 +36,29 @@ const RestaurantMenu = () => {
       <div className="flex flex-col m-4 p-4 w-10/12 items-center justify-center bg-gray-300 rounded-md">
         <h1 className="text-3xl">Menu</h1>
         <ul className="w-10/12">
-          {Object.values(restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?? {}).map((item) => {
+          {Object.values(itemCards).map((item) => {
             const [type, color] = item?.card?.info?.isVeg ? ["vegetarian", "green-600"] : ["non-vegetarian", "red-600"];
             console.log("item : ",item);
             return item ? ( 
             <li className="flex p-2 m-2 rounded-md bg-slate-50" key={item?.card?.info?.id}>
                 <div className="m-2 p-2 w-3/4">
-                  <h2 className="text-xl">{item?.card?.info?.name}</h2>
-                    <p className="text-xs py-2"><span className="font-semibold">Add-Ons : </span> 
-                    {Object.values(restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards[6]?.card?.info?.addons?? {}).map((addons) => (
+                  <div className="flex justify-between">
+                    <h2 className="text-xl">{item?.card?.info?.name}</h2>
+                    <button className="bg-lime-600 hover:bg-emerald-600 px-2 rounded-md font-medium text-sm text-white" onClick={()=>{
+                      handleAddItem(item);
+                    }}>Add to Cart</button>
+                  </div>                  
+                    <p key={item?.card?.info?.id} className="text-xs py-2"><span className="font-semibold">Add-Ons : </span> 
+                    {Object.values(item.card?.info?.addons??{}).map((addons) => (
                       Object.values(addons?.choices?? {}).map((choices) => (
                         <span>{choices.name}, </span>
                       ))             
                     ))}</p>
-                    <p className={`text-xs font-medium text-${color}`}>Category : {type}</p>
+                    <div className="flex justify-between">
+                      <p  className={`text-xs font-medium text-${color}`}>Category : {type}</p>
+                      <p  className={`text-xs font-medium text-${color}`}>{item?.card?.info?.price? `Cost : ₹ ${item?.card?.info?.price/100}` : `Default Cost : ₹ ${item?.card?.info?.defaultPrice/100}`}</p>
+                    </div>
+                    
                 </div>
                 <div className="w-1/4 flex items-center">
                     <img className="p-1 rounded-lg" src={IMG_CLDNRY + item?.card?.info?.imageId} alt="" />
